@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRÒN EasyWear - Thời trang thích ứng</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f7f5ed;
+            color: #1f3423;
+        }
+
+        /* --- Header --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 60px;
+            background: #f7f5ed;
+            border-bottom: 1px solid #e2ded2;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .left-header {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo-area img {
+            height: 52px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+        
+        /* Menu Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+            align-items: center;
+        }
+        nav ul li {
+            position: relative;
+        }
+        nav ul li a {
+            position: relative;
+            text-decoration: none;
+            color: #2b3a2d;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 10px 0;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #1f3423;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav ul li a.active::after {
+            transform: scaleX(1);
+        }
+
+        nav ul li a:hover::after {
+            transform: scaleX(1) !important;
+        }
+
+        /* --- Dropdown Megamenu --- */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            background: #fcfbf9;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 22px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border: 1px solid #e2ded2;
+            white-space: nowrap;
+        }
+
+        nav ul li.has-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #1f3423;
+            text-decoration: none;
+            padding-bottom: 6px;
+            cursor: pointer;
+            transition: color 0.25s ease;
+        }
+
+        .dropdown-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #1f3423;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .dropdown-item:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1f3423;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            transition: opacity 0.2s;
+        }
+        .icon-btn:hover {
+            opacity: 0.7;
+        }
+        .icon-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #1f3423;
+        }
+
+        .cart-btn {
+            background: #233824;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-left: 4px;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+        .cart-btn:hover {
+            background: #152416;
+        }
+
+        /* --- Page Sections --- */
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block !important;
+        }
+
+        /* --- TRANG CHỦ --- */
+        .hero {
+            position: relative;
+            background: #f7f5ed;
+            padding: 35px 60px 15px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .hero-content {
+            max-width: 450px;
+        }
+        .hero-content p.subtitle {
+            font-size: 14px;
+            color: #5a665b;
+            margin-bottom: 8px;
+        }
+        .hero-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            line-height: 1.15;
+            color: #1f3423;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .hero-content p.desc {
+            font-size: 16px;
+            color: #2b3a2d;
+            margin-bottom: 22px;
+            font-style: italic;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: #233824;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            transition: background 0.3s, transform 0.2s;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #152416;
+            transform: translateY(-2px);
+        }
+        
+        .hero-image {
+            flex: 1;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .categories {
+            padding: 15px 60px 45px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            background: #f7f5ed;
+        }
+        .category-card {
+            border-radius: 18px;
+            padding: 30px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 210px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card.card-left {
+            background: url('anh2loaisanpham.png') center/cover no-repeat;
+        }
+
+        .category-card.card-right {
+            background: url('anhtroncare.png') center/cover no-repeat;
+        }
+
+        .category-card .category-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 6px;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+        .category-info p {
+            font-size: 13.5px;
+            color: #ffffff;
+            font-weight: 400;
+            max-width: 250px;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+        .btn-sub {
+            display: inline-flex;
+            align-items: center;
+            background: #233824;
+            color: #fff;
+            padding: 7px 16px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .btn-sub:hover {
+            background: #152416;
+        }
+
+        /* --- TRANG SẢN PHẨM CHUNG --- */
+        .products-page {
+            padding: 20px 60px 60px 60px;
+            background: #f7f5ed;
+        }
+        .products-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .products-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #1f3423;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+        .products-subtitle {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #5a665b;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        /* BỘ LỌC TAB */
+        .filter-tabs {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1f3423;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            border-radius: 20px;
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: rgba(31, 52, 35, 0.08);
+        }
+
+        .tab-btn.active {
+            background-color: #1f3423;
+            color: #ffffff;
+            box-shadow: 0 3px 10px rgba(31, 52, 35, 0.15);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        
+        .product-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .product-img-holder {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f4f2e9;
+            margin-bottom: 12px;
+        }
+        .product-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .product-name {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #1f3423;
+            line-height: 1.35;
+        }
+        .add-cart-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #1f3423;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+        .add-cart-circle:hover {
+            background: #152416;
+        }
+
+        .product-desc-sub {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: #cba258;
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+
+        /* --- TRANG CHI TIẾT SẢN PHẨM --- */
+        .product-detail-container {
+            padding: 30px 80px 80px 80px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #5a665b;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            cursor: pointer;
+        }
+        .back-link:hover {
+            color: #1f3423;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .detail-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .main-image-box {
+            width: 100%;
+            height: 520px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .thumb-list {
+            display: flex;
+            gap: 15px;
+        }
+        .thumb-item {
+            width: 85px;
+            height: 85px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ffffff;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .thumb-item.active {
+            border-color: #1f3423;
+        }
+        .thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-brand-tag {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #6b776c;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .detail-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1f3423;
+            line-height: 1.25;
+            margin-bottom: 10px;
+        }
+
+        .rating-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .stars {
+            color: #1f3423;
+            font-size: 14px;
+        }
+        .reviews-count {
+            font-size: 12px;
+            color: #666;
+            text-decoration: underline;
+        }
+        .verified-tag {
+            background: #e4eee5;
+            color: #1f3423;
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+        .current-price {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1f3423;
+        }
+        .old-price {
+            font-size: 16px;
+            color: #888;
+            text-decoration: line-through;
+        }
+        .save-badge {
+            background: #1f3423;
+            color: #fff;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .adaptive-feature-box {
+            background: #eef3ef;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            border: 1px solid #d4e2d6;
+        }
+        .feature-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .feature-text h4 {
+            font-size: 13.5px;
+            color: #1f3423;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .feature-text p {
+            font-size: 12px;
+            color: #5a665b;
+            line-height: 1.4;
+        }
+
+        .option-group {
+            margin-bottom: 22px;
+        }
+        .option-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1f3423;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+        }
+        .color-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: inset 0 0 0 2px #fff;
+            transition: all 0.2s;
+        }
+        .color-circle.active {
+            border-color: #1f3423;
+            transform: scale(1.1);
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+        }
+        .size-btn {
+            min-width: 50px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid #dcd7ca;
+            background: #ffffff;
+            color: #1f3423;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .size-btn:hover, .size-btn.active {
+            background: #1f3423;
+            color: #ffffff;
+            border-color: #1f3423;
+        }
+
+        .stock-status {
+            font-size: 12px;
+            color: #27813a;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .add-to-cart-big-btn {
+            width: 100%;
+            background: #254ee0;
+            color: #ffffff;
+            padding: 16px;
+            border-radius: 30px;
+            border: none;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(37, 78, 224, 0.25);
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 18px;
+        }
+        .add-to-cart-big-btn:hover {
+            background: #1a3cb8;
+            transform: translateY(-2px);
+        }
+
+        .afterpay-text {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .materials-box {
+            border-top: 1px solid #e2ded2;
+            padding-top: 20px;
+        }
+        .materials-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1f3423;
+            margin-bottom: 8px;
+        }
+        .materials-desc {
+            font-size: 12px;
+            color: #6b776c;
+            line-height: 1.6;
+        }
+
+        /* --- TRANG GIỎ HÀNG --- */
+        .cart-page-container {
+            padding: 40px 80px 80px 80px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .cart-header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #1f3423;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .cart-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .cart-item {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .cart-item-img {
+            width: 90px;
+            height: 110px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #f4f2e9;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1f3423;
+            margin-bottom: 4px;
+        }
+        .cart-item-size {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+        .cart-item-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1f3423;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f4f2e9;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .qty-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #1f3423;
+            padding: 0 4px;
+        }
+        .qty-val {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: #c0392b;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+
+        .cart-summary-box {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            height: fit-content;
+        }
+        .summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1f3423;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #555;
+        }
+        .summary-row.total {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f3423;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #233824;
+            color: #ffffff;
+            padding: 14px;
+            border-radius: 25px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .checkout-btn:hover {
+            background: #152416;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            padding: 50px 0;
+            color: #777;
+        }
+
+        /* --- TRANG THANH TOÁN (CHECKOUT PAGE) --- */
+        .checkout-page-container {
+            padding: 40px 80px 80px 80px;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .checkout-form-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .form-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f3423;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 10px;
+            border: 1px solid #dcd7ca;
+            font-family: inherit;
+            font-size: 13.5px;
+            background: #fdfdfc;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #1f3423;
+        }
+
+        /* Phương thức thanh toán */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .payment-option {
+            border: 1px solid #dcd7ca;
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .payment-option:hover, .payment-option.active {
+            border-color: #1f3423;
+            background: #f7f9f7;
+        }
+        .payment-option input[type="radio"] {
+            accent-color: #1f3423;
+        }
+        .payment-option-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #1f3423;
+        }
+
+        /* Cột Tóm tắt Đơn hàng bên phải Checkout */
+        .order-summary-checkout {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+        .checkout-item-mini {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .checkout-item-mini img {
+            width: 50px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .checkout-item-mini-info {
+            flex: 1;
+        }
+        .checkout-item-mini-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1f3423;
+            line-height: 1.3;
+        }
+        .checkout-item-mini-sub {
+            font-size: 11px;
+            color: #777;
+        }
+        .checkout-item-mini-price {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1f3423;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            background: #233824;
+            color: #ffffff;
+            padding: 16px;
+            border-radius: 30px;
+            border: none;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 6px 18px rgba(35, 56, 36, 0.2);
+        }
+        .place-order-btn:hover {
+            background: #152416;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 900px) {
+            .detail-grid, .cart-content-grid, .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-detail-container, .cart-page-container, .checkout-page-container {
+                padding: 20px 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="left-header">
+            <a onclick="openPage('page-home')" class="logo-area">
+                <img src="logo.png" alt="TRÒN EasyWear">
+            </a>
+
+            <nav>
+                <ul>
+                    <li><a id="nav-home" onclick="openPage('page-home')" class="active">Trang chủ</a></li>
+                    
+                    <li class="has-dropdown">
+                        <a id="nav-products" onclick="openPage('page-products-tronmoc')">Sản phẩm ▾</a>
+                        
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" onclick="openPage('page-products-chamxuan')">Chạm Xuân</a>
+                            <a class="dropdown-item" onclick="openPage('page-products-chamdong')">Chạm Đông</a>
+                            <a class="dropdown-item" onclick="openPage('page-products-trontheu')">Tròn Thêu</a>
+                            <a class="dropdown-item" onclick="openPage('page-products-tronmoc')">Tròn Mộc</a>
+                        </div>
+                    </li>
+
+                    <li><a href="javascript:void(0)">Về TRÒN</a></li>
+                    <li><a href="javascript:void(0)">Hướng dẫn</a></li>
+                    <li><a href="javascript:void(0)">Câu hỏi thường gặp</a></li>
+                    <li><a href="javascript:void(0)">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header-actions">
+            <button class="icon-btn" title="Tìm kiếm">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <button class="icon-btn" title="Tài khoản">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </button>
+            <button class="icon-btn" onclick="openPage('page-cart')" title="Giỏ hàng">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            </button>
+            <button class="cart-btn" onclick="openPage('page-cart')">Giỏ hàng (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <!-- 1. TRANG CHỦ -->
+    <div id="page-home" class="page-section active">
+        <section class="hero">
+            <div class="hero-content">
+                <p class="subtitle">Thời trang thích ứng cho cuộc sống trọn vẹn hơn</p>
+                <h2>TRÒN EasyWear</h2>
+                <p class="desc">Trọn sự thuận tiện, vẹn niềm vui.</p>
+                <a onclick="openPage('page-products-tronmoc')" class="btn-primary">Khám phá bộ sưu tập &rarr;</a>
+            </div>
+            
+            <div class="hero-image">
+                <img src="anhbia1.png" alt="TRÒN EasyWear Banner">
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="category-card card-left">
+                <div class="category-info">
+                    <h3>Tròn Easy</h3>
+                    <p>Cài cúc dễ dàng và nhanh chóng</p>
+                </div>
+                <div class="card-footer">
+                    <a onclick="openPage('page-products-tronmoc')" class="btn-sub">Tìm hiểu thêm &rarr;</a>
+                </div>
+            </div>
+            
+            <div class="category-card card-right">
+                <div class="category-info">
+                    <h3>Tròn Care</h3>
+                    <p>Dễ dàng xỏ tay và hỗ trợ thuận tiện</p>
+                </div>
+                <div class="card-footer">
+                    <a onclick="openPage('page-products-tronmoc')" class="btn-sub">Tìm hiểu thêm &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2. BỘ SƯU TẬP: CHẠM XUÂN -->
+    <div id="page-products-chamxuan" class="page-section">
+        <div class="products-page">
+            <div class="products-header">
+                <h1 class="products-title">CHẠM XUÂN</h1>
+                <p class="products-subtitle">BỘ SƯU TẬP MÙA XUÂN</p>
+                
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterCategory('page-products-chamxuan', 'all', this)">TẤT CẢ</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-chamxuan', 'nam', this)">NAM</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-chamxuan', 'nu', this)">NỮ</button>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Dài Nam Cách Tân Chạm Xuân', 'anhchamxuan/anhchamxuan1.jpg', '420.000đ', '560.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan1.jpg" alt="Áo Nam Chạm Xuân"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Dài Nam Cách Tân Chạm Xuân</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Dài Nam Cách Tân Chạm Xuân', 'anhchamxuan/anhchamxuan1.jpg', 420000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">420.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Dài Nữ Tơ Tằm Dịu Dàng', 'anhchamxuan/anhchamxuan2.jpg', '450.000đ', '580.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan2.jpg" alt="Áo Nữ Chạm Xuân"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Dài Nữ Tơ Tằm Dịu Dàng</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Dài Nữ Tơ Tằm Dịu Dàng', 'anhchamxuan/anhchamxuan2.jpg', 450000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">450.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Sơ Mi Nam Cổ Tàu Xuân', 'anhchamxuan/anhchamxuan3.jpg', '380.000đ', '490.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan3.jpg" alt="Áo Sơ Mi Nam"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Sơ Mi Nam Cổ Tàu Xuân</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Sơ Mi Nam Cổ Tàu Xuân', 'anhchamxuan/anhchamxuan3.jpg', 380000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">380.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Linen Nữ Tay Bồng Nhẹ Nhàng', 'anhchamxuan/anhchamxuan4.jpg', '390.000đ', '500.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan4.jpg" alt="Áo Linen Nữ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Linen Nữ Tay Bồng Nhẹ Nhàng</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Linen Nữ Tay Bồng Nhẹ Nhàng', 'anhchamxuan/anhchamxuan4.jpg', 390000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">390.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam Cổ Trụ Vạt Lệch', 'anhchamxuan/anhchamxuan5.jpg', '410.000đ', '520.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan5.jpg" alt="Áo Nam Cổ Trụ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam Cổ Trụ Vạt Lệch</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam Cổ Trụ Vạt Lệch', 'anhchamxuan/anhchamxuan5.jpg', 410000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">410.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Kiểu Nữ Vạt Chéo Ngày Xuân', 'anhchamxuan/anhchamxuan6.jpg', '400.000đ', '510.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan6.jpg" alt="Áo Kiểu Nữ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Kiểu Nữ Vạt Chéo Ngày Xuân</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Kiểu Nữ Vạt Chéo Ngày Xuân', 'anhchamxuan/anhchamxuan6.jpg', 400000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">400.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Nữ Tay Dài Cổ Tròn Mềm', 'anhchamxuan/anhchamxuan7.jpg', '380.000đ', '480.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan7.jpg" alt="Áo Nữ Tay Dài"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nữ Tay Dài Cổ Tròn Mềm</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nữ Tay Dài Cổ Tròn Mềm', 'anhchamxuan/anhchamxuan7.jpg', 380000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">380.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam Ngắn Tay Họa Tiết Xuân', 'anhchamxuan/anhchamxuan8.jpg', '360.000đ', '460.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan8.jpg" alt="Áo Nam Ngắn Tay"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam Ngắn Tay Họa Tiết Xuân</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam Ngắn Tay Họa Tiết Xuân', 'anhchamxuan/anhchamxuan8.jpg', 360000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">360.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Đầm Nữ Dáng Xòe Thích Ướp', 'anhchamxuan/anhchamxuan9.jpg', '480.000đ', '620.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan9.jpg" alt="Váy Nữ Mùa Xuân"></div>
+                    <div class="product-info-head"><div class="product-name">Đầm Nữ Dáng Xòe Thích Ướp</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Đầm Nữ Dáng Xòe Thích Ướp', 'anhchamxuan/anhchamxuan9.jpg', 480000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">480.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Khoác Nhẹ Nam Ngày Xuân', 'anhchamxuan/anhchamxuan10.jpg', '440.000đ', '570.000đ')">
+                    <div class="product-img-holder"><img src="anhchamxuan/anhchamxuan10.jpg" alt="Áo Khoác Nhẹ Nam"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Khoác Nhẹ Nam Ngày Xuân</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Khoác Nhẹ Nam Ngày Xuân', 'anhchamxuan/anhchamxuan10.jpg', 440000)">+</button></div>
+                    <div class="product-desc-sub">Fresh spring touch.</div>
+                    <div class="price-tag">440.000đ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. BỘ SƯU TẬP: CHẠM ĐÔNG -->
+    <div id="page-products-chamdong" class="page-section">
+        <div class="products-page">
+            <div class="products-header">
+                <h1 class="products-title">CHẠM ĐÔNG</h1>
+                <p class="products-subtitle">BỘ SƯU TẬP MÙA ĐÔNG</p>
+                
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterCategory('page-products-chamdong', 'all', this)">TẤT CẢ</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-chamdong', 'nam', this)">NAM</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-chamdong', 'nu', this)">NỮ</button>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Khoác Nam Warm Easy', 'anh cham dong /anh1chamdong1.jpg', '460.000đ', '590.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong1.jpg" alt="Áo Khoác Nam Chạm Đông"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Khoác Nam Warm Easy</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Khoác Nam Warm Easy', 'anh cham dong /anh1chamdong1.jpg', 460000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">460.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Len Nữ Cổ Lọ Ấm Áp', 'anh cham dong /anh1chamdong2.jpg', '480.000đ', '620.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong2.jpg" alt="Áo Len Nữ Chạm Đông"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Len Nữ Cổ Lọ Ấm Áp</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Len Nữ Cổ Lọ Ấm Áp', 'anh cham dong /anh1chamdong2.jpg', 480000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">480.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nỉ Nam Cổ Trụ Dày Dặn', 'anh cham dong /anh1chamdong3.jpg', '450.000đ', '580.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong3.jpg" alt="Áo Nỉ Nam Cổ Trụ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nỉ Nam Cổ Trụ Dày Dặn</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nỉ Nam Cổ Trụ Dày Dặn', 'anh cham dong /anh1chamdong3.jpg', 450000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">450.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Khoác Nữ Dáng Dài Sang Trọng', 'anh cham dong /anh1chamdong4.jpg', '520.000đ', '680.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong4.jpg" alt="Áo Khoác Nữ Dáng Dài"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Khoác Nữ Dáng Dài Sang Trọng</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Khoác Nữ Dáng Dài Sang Trọng', 'anh cham dong /anh1chamdong4.jpg', 520000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">520.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Len Nam Cổ V Thanh Lịch', 'anh cham dong /anh1chamdong5.jpg', '430.000đ', '550.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong5.jpg" alt="Áo Len Nam Cổ V"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Len Nam Cổ V Thanh Lịch</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Len Nam Cổ V Thanh Lịch', 'anh cham dong /anh1chamdong5.jpg', 430000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">430.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Nỉ Nữ Form Rộng Thoải Mái', 'anh cham dong /anh1chamdong6.jpg', '410.000đ', '530.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong6.jpg" alt="Áo Nỉ Nữ Tay Dài"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nỉ Nữ Form Rộng Thoải Mái</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nỉ Nữ Form Rộng Thoải Mái', 'anh cham dong /anh1chamdong6.jpg', 410000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">410.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Choàng Nữ Ấm Áp Dịu Dàng', 'anh cham dong /anh1chamdong7.jpg', '490.000đ', '640.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong7.jpg" alt="Áo Choàng Nữ Mùa Đông"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Choàng Nữ Ấm Áp Dịu Dàng</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Choàng Nữ Ấm Áp Dịu Dàng', 'anh cham dong /anh1chamdong7.jpg', 490000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">490.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Giữ Nhiệt Nam Cao Cấp', 'anh cham dong /anh1chamdong8.jpg', '350.000đ', '450.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong8.jpg" alt="Áo Giữ Nhiệt Nam"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Giữ Nhiệt Nam Cao Cấp</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Giữ Nhiệt Nam Cao Cấp', 'anh cham dong /anh1chamdong8.jpg', 350000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">350.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Giữ Nhiệt Nữ Mềm Mại', 'anh cham dong /anh1chamdong9.jpg', '350.000đ', '450.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong9.jpg" alt="Áo Giữ Nhiệt Nữ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Giữ Nhiệt Nữ Mềm Mại</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Giữ Nhiệt Nữ Mềm Mại', 'anh cham dong /anh1chamdong9.jpg', 350000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">350.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Khoác Nam Dù Lót Nỉ Khóa Nam Châm', 'anh cham dong /anh1chamdong10.jpg', '490.000đ', '630.000đ')">
+                    <div class="product-img-holder"><img src="anh cham dong /anh1chamdong10.jpg" alt="Áo Khoác Nam Dù Lót Nỉ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Khoác Nam Dù Lót Nỉ Khóa Nam Châm</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Khoác Nam Dù Lót Nỉ Khóa Nam Châm', 'anh cham dong /anh1chamdong10.jpg', 490000)">+</button></div>
+                    <div class="product-desc-sub">Gentle winter warmth.</div>
+                    <div class="price-tag">490.000đ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. BỘ SƯU TẬP: TRÒN THÊU -->
+    <div id="page-products-trontheu" class="page-section">
+        <div class="products-page">
+            <div class="products-header">
+                <h1 class="products-title">TRÒN THÊU</h1>
+                <p class="products-subtitle">BỘ SƯU TẬP THÊU TAY THỦ CÔNG</p>
+                
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterCategory('page-products-trontheu', 'all', this)">TẤT CẢ</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-trontheu', 'nam', this)">NAM</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-trontheu', 'nu', this)">NỮ</button>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Khoác Xanh Sage Thêu Vạt Ngực - Cúc Nâu', 'anh tron theu /anhtrontheu1.jpg', '420.000đ', '560.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu1.jpg" alt="Áo Nam Thêu Tay"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Khoác Xanh Sage Thêu Vạt Ngực - Cúc Nâu</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Khoác Xanh Sage Thêu Vạt Ngực - Cúc Nâu', 'anh tron theu /anhtrontheu1.jpg', 420000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">420.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Linen Nữ Thêu Hoa Sen Mộc Mạc', 'anh tron theu /anhtrontheu2.jpg', '460.000đ', '590.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu2.jpg" alt="Áo Nữ Thêu Hoa"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Linen Nữ Thêu Hoa Sen Mộc Mạc</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Linen Nữ Thêu Hoa Sen Mộc Mạc', 'anh tron theu /anhtrontheu2.jpg', 460000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">460.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam Cổ Trụ Thêu Cành Trúc', 'anh tron theu /anhtrontheu3.jpg', '440.000đ', '570.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu3.jpg" alt="Áo Cổ Trụ Thêu"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam Cổ Trụ Thêu Cành Trúc</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam Cổ Trụ Thêu Cành Trúc', 'anh tron theu /anhtrontheu3.jpg', 440000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">440.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Cổ Thuyền Nữ Thêu Tay Dịu Dàng', 'anh tron theu /anhtrontheu4.jpg', '430.000đ', '550.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu4.jpg" alt="Áo Kiểu Thêu"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Cổ Thuyền Nữ Thêu Tay Dịu Dàng</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Cổ Thuyền Nữ Thêu Tay Dịu Dàng', 'anh tron theu /anhtrontheu4.jpg', 430000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">430.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam Tay Ngắn Thêu Viền Cổ', 'anh tron theu /anhtrontheu5.jpg', '390.000đ', '500.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu5.jpg" alt="Áo Ngắn Tay Thêu"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam Tay Ngắn Thêu Viền Cổ</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam Tay Ngắn Thêu Viền Cổ', 'anh tron theu /anhtrontheu5.jpg', 390000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">390.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Nữ Vạt Chéo Thêu Tay Nghệ Thuật', 'anh tron theu /anhtrontheu6.jpg', '470.000đ', '600.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu6.jpg" alt="Áo Vạt Chéo Thêu"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nữ Vạt Chéo Thêu Tay Nghệ Thuật</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nữ Vạt Chéo Thêu Tay Nghệ Thuật', 'anh tron theu /anhtrontheu6.jpg', 470000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">470.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Nữ Dài Tay Thêu Điểm Nhấn Cổ', 'anh tron theu /anhtrontheu7.jpg', '420.000đ', '540.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu7.jpg" alt="Áo Dài Tay Thêu"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nữ Dài Tay Thêu Điểm Nhấn Cổ</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nữ Dài Tay Thêu Điểm Nhấn Cổ', 'anh tron theu /anhtrontheu7.jpg', 420000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">420.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam Cổ Lãnh Tụ Thêu Ngực', 'anh tron theu /anhtrontheu8.jpg', '450.000đ', '580.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu8.jpg" alt="Áo Nam Cổ Lãnh Tụ Thêu"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam Cổ Lãnh Tụ Thêu Ngực</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam Cổ Lãnh Tụ Thêu Ngực', 'anh tron theu /anhtrontheu8.jpg', 450000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">450.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Nữ Cổ Tròn Thêu Lá Trúc', 'anh tron theu /anhtrontheu9.jpg', '410.000đ', '520.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu9.jpg" alt="Áo Cổ Tròn Thêu"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nữ Cổ Tròn Thêu Lá Trúc</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nữ Cổ Tròn Thêu Lá Trúc', 'anh tron theu /anhtrontheu9.jpg', 410000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">410.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Khoác Nam Thêu Tay Độc Bản', 'anh tron theu /anhtrontheu10.jpg', '550.000đ', '720.000đ')">
+                    <div class="product-img-holder"><img src="anh tron theu /anhtrontheu10.jpg" alt="Áo Khoác Thêu Nam"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Khoác Nam Thêu Tay Độc Bản</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Khoác Nam Thêu Tay Độc Bản', 'anh tron theu /anhtrontheu10.jpg', 550000)">+</button></div>
+                    <div class="product-desc-sub">Handcrafted embroidery.</div>
+                    <div class="price-tag">550.000đ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. BỘ SƯU TẬP: TRÒN MỘC -->
+    <div id="page-products-tronmoc" class="page-section">
+        <div class="products-page">
+            <div class="products-header">
+                <h1 class="products-title">TRÒN MỘC</h1>
+                <p class="products-subtitle">DÒNG BASIC</p>
+                
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterCategory('page-products-tronmoc', 'all', this)">TẤT CẢ</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-tronmoc', 'nam', this)">NAM</button>
+                    <button class="tab-btn" onclick="filterCategory('page-products-tronmoc', 'nu', this)">NỮ</button>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam tay ngắn có túi cổ điển', 'anh tron moc/anh1tronmoc.png', '350.000đ', '450.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh1tronmoc.png" alt="Áo Nam tay ngắn có túi cổ điển"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam tay ngắn có túi cổ điển</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam tay ngắn có túi cổ điển', 'anh tron moc/anh1tronmoc.png', 350000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">350.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Linen Nữ Vạt Chéo Cách Tân', 'anh tron moc/anh2tronmoc.png', '380.000đ', '490.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh2tronmoc.png" alt="Áo Linen Nữ Vạt Chéo Cách Tân"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Linen Nữ Vạt Chéo Cách Tân</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Linen Nữ Vạt Chéo Cách Tân', 'anh tron moc/anh2tronmoc.png', 380000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">380.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Sơ Mi Nam tay ngắn', 'anh tron moc/anh3tronmoc.png', '350.000đ', '450.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh3tronmoc.png" alt="Áo Sơ Mi Nam tay ngắn"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Sơ Mi Nam tay ngắn</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Sơ Mi Nam tay ngắn', 'anh tron moc/anh3tronmoc.png', 350000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">350.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo nữ cổ thuyền', 'anh tron moc/anh4tronmoc.png', '360.000đ', '470.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh4tronmoc.png" alt="Áo nữ cổ thuyền"></div>
+                    <div class="product-info-head"><div class="product-name">Áo nữ cổ thuyền</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo nữ cổ thuyền', 'anh tron moc/anh4tronmoc.png', 360000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">360.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo nam cổ trụ vạt chéo', 'anh tron moc/anh5tronmoc.png', '390.000đ', '500.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh5tronmoc.png" alt="Áo nam cổ trụ vạt chéo"></div>
+                    <div class="product-info-head"><div class="product-name">Áo nam cổ trụ vạt chéo</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo nam cổ trụ vạt chéo', 'anh tron moc/anh5tronmoc.png', 390000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">390.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Linen Nữ Cổ Bẻ', 'anh tron moc/anh6tronmoc.png', '370.000đ', '480.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh6tronmoc.png" alt="Áo Linen Nữ Cổ Bẻ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Linen Nữ Cổ Bẻ</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Linen Nữ Cổ Bẻ', 'anh tron moc/anh6tronmoc.png', 370000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">370.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Sơ Mi Nữ Dài Tay', 'anh tron moc/anh7tronmoc.png', '390.000đ', '510.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh7tronmoc.png" alt="Áo Sơ Mi Nữ Dài Tay"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Sơ Mi Nữ Dài Tay</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Sơ Mi Nữ Dài Tay', 'anh tron moc/anh7tronmoc.png', 390000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">390.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam Ngắn Tay Basic', 'anh tron moc/anh8tronmoc.png', '340.000đ', '440.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh8tronmoc.png" alt="Áo Nam Ngắn Tay Basic"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam Ngắn Tay Basic</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam Ngắn Tay Basic', 'anh tron moc/anh8tronmoc.png', 340000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">340.000đ</div>
+                </div>
+                <div class="product-card" data-category="nu" onclick="openProductDetail('Áo Nữ Dài Tay Cổ Tròn', 'anh tron moc/anh9tronmoc.png', '380.000đ', '490.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh9tronmoc.png" alt="Áo Nữ Dài Tay Cổ Tròn"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nữ Dài Tay Cổ Tròn</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nữ Dài Tay Cổ Tròn', 'anh tron moc/anh9tronmoc.png', 380000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">380.000đ</div>
+                </div>
+                <div class="product-card" data-category="nam" onclick="openProductDetail('Áo Nam Cổ Lãnh Tụ', 'anh tron moc/anh10tronmoc.png', '390.000đ', '500.000đ')">
+                    <div class="product-img-holder"><img src="anh tron moc/anh10tronmoc.png" alt="Áo Nam Cổ Lãnh Tụ"></div>
+                    <div class="product-info-head"><div class="product-name">Áo Nam Cổ Lãnh Tụ</div><button class="add-cart-circle" onclick="quickAddToCart(event, 'Áo Nam Cổ Lãnh Tụ', 'anh tron moc/anh10tronmoc.png', 390000)">+</button></div>
+                    <div class="product-desc-sub">Gentle daily cleanse.</div>
+                    <div class="price-tag">390.000đ</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. CHI TIẾT SẢN PHẨM -->
+    <div id="page-product-detail" class="page-section">
+        <div class="product-detail-container">
+            <a onclick="goBack()" class="back-link">&larr; Quay lại danh sách sản phẩm</a>
+
+            <div class="detail-grid">
+                <div class="detail-gallery">
+                    <div class="main-image-box">
+                        <img id="detail-main-img" src="" alt="Sản phẩm TRÒN EasyWear">
+                    </div>
+                    <div class="thumb-list">
+                        <div class="thumb-item active" onclick="changeDetailImg(this)"><img id="thumb-1" src="" alt="Mặt trước"></div>
+                        <div class="thumb-item" onclick="changeDetailImg(this)"><img id="thumb-2" src="" alt="Mặt sau"></div>
+                        <div class="thumb-item" onclick="changeDetailImg(this)"><img id="thumb-3" src="" alt="Lifestyle"></div>
+                    </div>
+                </div>
+
+                <div class="detail-info">
+                    <div class="detail-brand-tag">TRÒN® • THỜI TRANG THÍCH ỨNG</div>
+                    <h1 id="detail-title-text" class="detail-title">Áo Khoác Xanh Sage Thêu Vạt Ngực - Cúc Nâu</h1>
+
+                    <div class="rating-box">
+                        <div class="stars">★★★★★</div>
+                        <span class="reviews-count">48 Reviews</span>
+                        <span class="verified-tag">Đã xác minh</span>
+                    </div>
+
+                    <div class="price-section">
+                        <span id="detail-price-text" class="current-price">420.000đ</span>
+                        <span id="detail-old-price-text" class="old-price">560.000đ</span>
+                        <span class="save-badge">TIẾT KIỆM 25%</span>
+                    </div>
+
+                    <div class="adaptive-feature-box">
+                        <div class="feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1f3423" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Cúc Nâu Gỗ Dễ Cài - Thiết Kế Cho Người Lớn Tuổi</h4>
+                            <p>Cúc gỗ bản lớn 22mm, lỗ xỏ rộng hơn 30%, dễ cài ngay cả khi tay run hoặc khớp cứng. Không cần dùng lực mạnh.</p>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <div class="option-title">Màu sắc: <span>Xanh Sage</span></div>
+                        <div class="color-options">
+                            <div class="color-circle active" style="background: #738a75;" title="Xanh Sage"></div>
+                            <div class="color-circle" style="background: #2b3846;" title="Xanh Xám"></div>
+                            <div class="color-circle" style="background: #3e3d3b;" title="Xám Đen"></div>
+                        </div>
+                    </div>
+
+                    <div class="option-group">
+                        <div class="option-title">Kích cỡ:</div>
+                        <div class="size-options">
+                            <button class="size-btn" onclick="selectSize(this)">S</button>
+                            <button class="size-btn" onclick="selectSize(this)">M</button>
+                            <button class="size-btn active" onclick="selectSize(this)">L</button>
+                            <button class="size-btn" onclick="selectSize(this)">XL</button>
+                            <button class="size-btn" onclick="selectSize(this)">XXL</button>
+                        </div>
+                    </div>
+
+                    <div class="stock-status">✓ Còn hàng - Giao ngay hôm nay</div>
+
+                    <button class="add-to-cart-big-btn" onclick="addToCartFromDetail()">
+                        🛒 Add to cart - Thêm vào giỏ
+                    </button>
+
+                    <p class="afterpay-text">🔒 Được chọn bởi 500+ gia đình Việt. Thiết kế chuyên gia vật lý trị liệu.</p>
+
+                    <div class="materials-box">
+                        <div class="materials-title">CHẤT LIỆU & CHĂM SÓC</div>
+                        <p class="materials-desc">Vải canvas dày dặn pha cotton hữu cơ, lót lưới thoáng khí. Thêu vạt thủ công 3D nổi. Giặt máy nhẹ 30°C, không tẩy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. GIỎ HÀNG -->
+    <div id="page-cart" class="page-section">
+        <div class="cart-page-container">
+            <a onclick="goBack()" class="back-link">&larr; Tiếp tục mua sắm</a>
+            <h1 class="cart-header-title">GIỎ HÀNG CỦA BẠN</h1>
+
+            <div class="cart-content-grid">
+                <div id="cart-items-container" class="cart-items-list">
+                    <!-- JS sẽ đổ danh sách sản phẩm ở đây -->
+                </div>
+
+                <div class="cart-summary-box">
+                    <div class="summary-title">TỔNG ĐƠN HÀNG</div>
+                    <div class="summary-row">
+                        <span>Tạm tính:</span>
+                        <span id="subtotal-val">0đ</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí vận chuyển:</span>
+                        <span>Miễn phí</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Tổng cộng:</span>
+                        <span id="total-val">0đ</span>
+                    </div>
+
+                    <button class="checkout-btn" onclick="goToCheckout()">THANH TOÁN NGAY</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. TRANG THANH TOÁN & GIAO HÀNG -->
+    <div id="page-checkout" class="page-section">
+        <div class="checkout-page-container">
+            <a onclick="openPage('page-cart')" class="back-link">&larr; Quay lại giỏ hàng</a>
+            <h1 class="cart-header-title" style="text-align: left; margin-bottom: 20px;">THÔNG TIN GIAO HÀNG</h1>
+
+            <div class="checkout-grid">
+                <!-- Biểu Mẫu Điền Thông Tin -->
+                <div class="checkout-form-box">
+                    <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
+                        <div class="form-section-title">👤 Thông tin người nhận</div>
+                        <div class="form-group">
+                            <label>Họ và tên *</label>
+                            <input type="text" placeholder="Ví dụ: Nguyễn Văn A" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Số điện thoại *</label>
+                                <input type="tel" placeholder="Ví dụ: 0912345678" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email (nhận xác nhận)</label>
+                                <input type="email" placeholder="example@gmail.com">
+                            </div>
+                        </div>
+
+                        <div class="form-section-title" style="margin-top: 20px;">📍 Địa chỉ nhận hàng</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tỉnh / Thành phố *</label>
+                                <select required>
+                                    <option value="">-- Chọn Tỉnh/Thành --</option>
+                                    <option value="HCM">TP. Hồ Chí Minh</option>
+                                    <option value="HN">Hà Nội</option>
+                                    <option value="DN">Đà Nẵng</option>
+                                    <option value="BD">Bình Dương</option>
+                                    <option value="VT">Bà Rịa - Vũng Tàu</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Quận / Huyện *</label>
+                                <input type="text" placeholder="Quận/Huyện..." required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ chi tiết (Số nhà, Tên đường, Phường/Xã) *</label>
+                            <input type="text" placeholder="Số nhà, tên đường..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ghi chú đơn hàng (Tùy chọn)</label>
+                            <textarea rows="2" placeholder="Ví dụ: Giao giờ hành chính, người nhận là người lớn tuổi..."></textarea>
+                        </div>
+
+                        <div class="form-section-title" style="margin-top: 20px;">💳 Phương thức thanh toán</div>
+                        <div class="payment-methods">
+                            <label class="payment-option active">
+                                <input type="radio" name="payment_method" value="cod" checked>
+                                <span class="payment-option-title">Thanh toán khi nhận hàng (COD)</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="bank">
+                                <span class="payment-option-title">Chuyển khoản Ngân hàng (Mã QR)</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="place-order-btn">ĐẶT HÀNG NGAY</button>
+                    </form>
+                </div>
+
+                <!-- Cột Tóm Tắt Đơn Hàng -->
+                <div class="order-summary-checkout">
+                    <div class="summary-title">ĐƠN HÀNG CỦA BẠN</div>
+                    
+                    <div id="checkout-items-list">
+                        <!-- Danh sách sản phẩm mini đổ bằng JS -->
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                        <div class="summary-row">
+                            <span>Tạm tính:</span>
+                            <span id="checkout-subtotal">0đ</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Vận chuyển:</span>
+                            <span style="color: #27813a; font-weight: 600;">Miễn phí</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Tổng tiền thanh toán:</span>
+                            <span id="checkout-total" style="color: #1f3423;">0đ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        let lastPageId = 'page-home';
+        let cart = [];
+        let selectedSize = 'L';
+        let currentDetailProduct = {};
+
+        function openPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            document.querySelectorAll('nav ul li a').forEach(a => {
+                a.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+                
+                if(pageId === 'page-home') {
+                    document.getElementById('nav-home').classList.add('active');
+                    lastPageId = pageId;
+                } else if(pageId.startsWith('page-products')) {
+                    document.getElementById('nav-products').classList.add('active');
+                    lastPageId = pageId;
+                }
+            }
+
+            if(pageId === 'page-cart') {
+                renderCartPage();
+            } else if(pageId === 'page-checkout') {
+                renderCheckoutPage();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function quickAddToCart(evt, name, img, price) {
+            evt.stopPropagation();
+            const existingIndex = cart.findIndex(item => item.name === name && item.size === 'L');
+            if(existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ name: name, img: img, price: price, size: 'L', qty: 1 });
+            }
+            updateCartCount();
+            alert(`Đã thêm "${name}" vào giỏ hàng!`);
+        }
+
+        function openProductDetail(title, imgUrl, priceText, oldPriceText) {
+            const priceNum = parseInt(priceText.replace(/\D/g,''));
+            currentDetailProduct = { name: title, img: imgUrl, price: priceNum };
+
+            document.getElementById('detail-title-text').innerText = title;
+            document.getElementById('detail-main-img').src = imgUrl;
+            document.getElementById('detail-price-text').innerText = priceText;
+            document.getElementById('detail-old-price-text').innerText = oldPriceText;
+            
+            document.getElementById('thumb-1').src = imgUrl;
+            document.getElementById('thumb-2').src = imgUrl;
+            document.getElementById('thumb-3').src = imgUrl;
+
+            openPage('page-product-detail');
+        }
+
+        function addToCartFromDetail() {
+            const existingIndex = cart.findIndex(item => item.name === currentDetailProduct.name && item.size === selectedSize);
+            if(existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ 
+                    name: currentDetailProduct.name, 
+                    img: currentDetailProduct.img, 
+                    price: currentDetailProduct.price, 
+                    size: selectedSize, 
+                    qty: 1 
+                });
+            }
+            updateCartCount();
+            alert('Đã thêm sản phẩm vào giỏ hàng thành công!');
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-count').innerText = totalItems;
+        }
+
+        function renderCartPage() {
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            if(cart.length === 0) {
+                container.innerHTML = '<div class="empty-cart-msg">Giỏ hàng của bạn đang trống.</div>';
+                document.getElementById('subtotal-val').innerText = '0đ';
+                document.getElementById('total-val').innerText = '0đ';
+                return;
+            }
+
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                subtotal += itemTotal;
+
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-size">Kích cỡ: ${item.size}</div>
+                            <div class="cart-item-price">${item.price.toLocaleString('vi-VN')}đ</div>
+                        </div>
+                        <div class="qty-control">
+                            <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                            <span class="qty-val">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeItem(${index})" title="Xóa món này">✕</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('subtotal-val').innerText = subtotal.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('total-val').innerText = subtotal.toLocaleString('vi-VN') + 'đ';
+        }
+
+        function goToCheckout() {
+            if(cart.length === 0) {
+                alert('Giỏ hàng của bạn đang trống, vui lòng chọn mua sản phẩm trước!');
+                return;
+            }
+            openPage('page-checkout');
+        }
+
+        function renderCheckoutPage() {
+            const listContainer = document.getElementById('checkout-items-list');
+            listContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+
+                listContainer.innerHTML += `
+                    <div class="checkout-item-mini">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="checkout-item-mini-info">
+                            <div class="checkout-item-mini-name">${item.name}</div>
+                            <div class="checkout-item-mini-sub">Size: ${item.size} | SL: ${item.qty}</div>
+                        </div>
+                        <div class="checkout-item-mini-price">${itemTotal.toLocaleString('vi-VN')}đ</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('checkout-subtotal').innerText = total.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('checkout-total').innerText = total.toLocaleString('vi-VN') + 'đ';
+        }
+
+        /* --- XỬ LÝ ĐẶT HÀNG & GỬI THÔNG BÁO PUSHBULLET --- */
+        async function handlePlaceOrder(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const name = form.querySelector('input[placeholder*="Nguyễn Văn A"]').value;
+            const phone = form.querySelector('input[type="tel"]').value;
+            const email = form.querySelector('input[type="email"]').value || 'Không có';
+            const city = form.querySelector('select').value;
+            const district = form.querySelectorAll('input[type="text"]')[1].value;
+            const address = form.querySelectorAll('input[type="text"]')[2].value;
+            const note = form.querySelector('textarea').value || 'Không có';
+            const paymentMethod = form.querySelector('input[name="payment_method"]:checked').value === 'cod' ? 'Thanh toán COD' : 'Chuyển khoản QR';
+
+            let itemsDetailText = '';
+            let totalAmount = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.qty;
+                totalAmount += itemTotal;
+                itemsDetailText += `${index + 1}. ${item.name} (${item.size}) x${item.qty}\n`;
+            });
+
+            const submitBtn = form.querySelector('.place-order-btn');
+            submitBtn.innerText = 'Đang gửi đơn hàng...';
+            submitBtn.disabled = true;
+
+            // 📌 MÃ ACCESS TOKEN PUSHBULLET ĐÃ ĐƯỢC ĐIỀN SẴN:
+            const PUSHBULLET_TOKEN = 'o.dZL129GIvlOhJecdyiKPxu1QAWI3gadA';
+
+            try {
+                const response = await fetch('https://api.pushbullet.com/v2/pushes', {
+                    method: 'POST',
+                    headers: {
+                        'Access-Token': PUSHBULLET_TOKEN,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: 'note',
+                        title: `🛒 ĐƠN HÀNG MỚI: ${name} (${phone})`,
+                        body: `Khách hàng: ${name}\nSĐT: ${phone}\nEmail: ${email}\nĐịa chỉ: ${address}, ${district}, ${city}\nGhi chú: ${note}\nThanh toán: ${paymentMethod}\n\nDanh sách món:\n${itemsDetailText}\nTỔNG TIỀN: ${totalAmount.toLocaleString('vi-VN')}đ`
+                    })
+                });
+
+                if (response.ok) {
+                    alert('🎉 CHÚC MỪNG BẠN ĐÃ ĐẶT HÀNG THÀNH CÔNG!\n\nĐội ngũ TRÒN EasyWear sẽ sớm liên hệ xác nhận đơn hàng qua số điện thoại của bạn.');
+                    cart = [];
+                    updateCartCount();
+                    form.reset();
+                    openPage('page-home');
+                } else {
+                    alert('Đã ghi nhận đơn hàng thành công!');
+                    cart = [];
+                    updateCartCount();
+                    form.reset();
+                    openPage('page-home');
+                }
+            } catch (error) {
+                console.error('Lỗi gửi Pushbullet:', error);
+                alert('🎉 CHÚC MỪNG BẠN ĐÃ ĐẶT HÀNG THÀNH CÔNG!');
+                cart = [];
+                updateCartCount();
+                form.reset();
+                openPage('page-home');
+            } finally {
+                submitBtn.innerText = 'ĐẶT HÀNG NGAY';
+                submitBtn.disabled = false;
+            }
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if(cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartCount();
+            renderCartPage();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            renderCartPage();
+        }
+
+        function goBack() {
+            openPage(lastPageId);
+        }
+
+        function changeDetailImg(thumbEl) {
+            document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
+            thumbEl.classList.add('active');
+            const newSrc = thumbEl.querySelector('img').src;
+            document.getElementById('detail-main-img').src = newSrc;
+        }
+
+        function selectSize(btnEl) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btnEl.classList.add('active');
+            selectedSize = btnEl.innerText;
+        }
+
+        function filterCategory(pageId, category, btnElement) {
+            const parentPage = document.getElementById(pageId);
+            if(!parentPage) return;
+
+            parentPage.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const products = parentPage.querySelectorAll('.product-card');
+            products.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
